@@ -48,6 +48,18 @@ Begin
     CreateDictionary := Arr;
 End;
 
+Procedure PrintGameRules();
+Begin
+    Writeln('Игра "Тренажер слов": ',#13#10,
+'1.Генерируется строка из 20 английских слов разделенных пробелами.',#13#10,
+'2.Обучаемый вводит строку, пытаясь повторить исходную.',#13#10,
+'3.Программа анализирует введенную строку и заменяет правильные слова новыми из словаря.',#13#10,
+'4.Неправильные слова остаются, но в них удваиваются неверно введенные буквы.',#13#10,
+'5.Если введенная строка верна, ее длина сокращается на 2 символа.',#13#10,
+'6.Игра продолжается до превышения ширины экрана или пока строка не станет нулевой.',#13#10,
+'7.При вводе комбинации "13" игра завершается.');
+End;
+
 Function InputTextFromFile(Const Num: Integer; OriginalString: String)
   : TStringArray;
 Var
@@ -310,7 +322,6 @@ Begin
     Repeat
     Begin
         IsCorrect := True;
-        Write('Введите строку: ');
         Readln(Input);
         If Input = '13' Then
         Begin
@@ -319,7 +330,7 @@ Begin
         End;
         If Length(OriginalString) <> Length(Input) Then
         Begin
-            Writeln('Вы ввели не правильное количество символов !');
+            Writeln('Вы ввели не правильное количество символов!');
             IsCorrect := False;
         End;
     End;
@@ -363,7 +374,7 @@ Begin
         Begin
             OriginalString := CreateStr(LenStr);
             OriginalString := TrimLeft(OriginalString);
-            Writeln('Исходная строка: ', OriginalString);
+            Writeln(OriginalString);
             Repeat
                 Input := UserTry(OriginalString);
                 If Input = '13' Then
@@ -405,6 +416,7 @@ Begin
 End;
 
 Begin
+    PrintGameRules;
     Randomize;
     Game();
     Readln;
